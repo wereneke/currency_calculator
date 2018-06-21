@@ -4,10 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CurrencyContainer implements Serializable {
@@ -57,30 +53,4 @@ public class CurrencyContainer implements Serializable {
     public void setRates(Currency[] rates) {
         this.rates = rates;
     }
-
-    public void setCurrencies(Map<String, Currency> currencies) {
-        this.currencies = currencies;
-    }
-
-    //maps its code to Currency
-    private Map<String,Currency> currencies = new HashMap<>();
-
-    public Map<String, Currency> getCurrencies() {
-        return currencies;
-    }
-
-    public Currency getCurrencyByCode(String code) {
-
-        if (!currencies.containsKey(code)) throw new IllegalArgumentException("no such code");
-        return currencies.get(code);
-    }
-
-    public Map<String, String> getCodes() {
-
-        Map<String, String> codeNames = currencies.entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getCurrency()));
-
-        return codeNames;
-    }
-
 }

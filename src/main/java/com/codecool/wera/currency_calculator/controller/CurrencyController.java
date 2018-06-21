@@ -1,25 +1,44 @@
 package com.codecool.wera.currency_calculator.controller;
 
-import com.codecool.wera.currency_calculator.currency.CurrencyContainer;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.client.RestTemplate;
+import com.codecool.wera.currency_calculator.currency.Currency;
+import com.codecool.wera.currency_calculator.service.CurrencyService;
+import com.codecool.wera.currency_calculator.service.RequestValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/currencies")
 public class CurrencyController {
 
-    private RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    private CurrencyService service;
 
-    private CurrencyContainer[] currencyContainerArray;
-    private CurrencyContainer currencyContainer;
+    @Autowired
+    private RequestValidator validator;
 
-    public void getTicks() {
-
-        String url = "http://api.nbp.pl/api/exchangerates/tables/C/";
-        currencyContainerArray = restTemplate.getForObject(url, CurrencyContainer[].class);
-        currencyContainer = currencyContainerArray[0];
+    @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, String> getAvailableCurrencies() {
+        return service.getAvailableCurrencies();
     }
 
-    public CurrencyContainer getCurrencyContainer() {
-        return currencyContainer;
+    @RequestMapping(value = "/calculator", method = RequestMethod.POST)
+    public String calculate(HttpServletRequest request) {
+
+        if (validator.isValid(request)) {
+            return service.calculate(request);
+        } else throw new Exception();
     }
+
+    @RequestMapping(value = "/exchange", method = RequestMethod.GET)
+    public Currency[] getExchangeRates() {
+        return service.getExchangeRates();
+    }
+
 }
