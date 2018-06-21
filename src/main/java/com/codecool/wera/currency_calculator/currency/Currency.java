@@ -1,7 +1,9 @@
 package com.codecool.wera.currency_calculator.currency;
 
+import javax.persistence.Entity;
 import java.math.BigDecimal;
 
+@Entity
 public class Currency {
 
     private String currency;
