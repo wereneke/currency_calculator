@@ -1,16 +1,15 @@
 package com.codecool.wera.currency_calculator.currency;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 public class Currency implements Serializable {
 
     private String currency;
     private String code;
-    private BigDecimal bid;
-    private BigDecimal ask;
+    private Float bid;
+    private Float ask;
 
-    public Currency(String currency, String code, BigDecimal bid, BigDecimal ask) {
+    public Currency(String currency, String code, Float bid, Float ask) {
         this.currency = currency;
         this.code = code;
         this.bid = bid;
@@ -35,19 +34,24 @@ public class Currency implements Serializable {
         this.code = code;
     }
 
-    public BigDecimal getBid() {
+    public Float getBid() {
         return bid;
     }
 
-    public void setBid(BigDecimal bid) {
+    public void setBid(Float bid) {
         this.bid = bid;
     }
 
-    public BigDecimal getAsk() {
+    public Float getAsk() {
         return ask;
     }
 
-    public void setAsk(BigDecimal ask) {
+    public void setAsk(Float ask) {
         this.ask = ask;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s | %s", currency, code);
     }
 }
