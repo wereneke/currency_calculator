@@ -1,11 +1,15 @@
 package com.codecool.wera.currency_calculator.currency;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Component
 public class CurrencyContainer {
 
+    //maps its code to Currency
     private Map<String,Currency> currencies = new HashMap<>();
 
     public Map<String, Currency> getCurrencies() {

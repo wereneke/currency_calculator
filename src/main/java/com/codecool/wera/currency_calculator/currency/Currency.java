@@ -1,10 +1,9 @@
 package com.codecool.wera.currency_calculator.currency;
 
-import javax.persistence.Entity;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Entity
-public class Currency {
+public class Currency implements Serializable {
 
     private String currency;
     private String code;
