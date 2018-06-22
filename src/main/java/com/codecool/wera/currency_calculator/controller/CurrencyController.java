@@ -2,7 +2,6 @@ package com.codecool.wera.currency_calculator.controller;
 
 import com.codecool.wera.currency_calculator.currency.Currency;
 import com.codecool.wera.currency_calculator.service.CurrencyService;
-import com.codecool.wera.currency_calculator.service.RequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,14 +25,17 @@ public class CurrencyController {
     }
 
     @RequestMapping(value = "/calculator", method = RequestMethod.POST)
+    @ResponseBody
     public String calculate(HttpServletRequest request) {
 
-//        if (service.isRequestValid(request)) {
+        if (service.isRequestValid(request)) {
             return service.calculate(request);
+        } else throw new BadRequestException();
 
     }
 
     @RequestMapping(value = "/exchange", method = RequestMethod.GET)
+    @ResponseBody
     public Currency[] getExchangeRates() {
         return service.getExchangeRates();
     }

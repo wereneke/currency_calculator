@@ -14,23 +14,23 @@ public class CurrencyService {
 
     private RestTemplate restTemplate;
     private CurrencyContainer currencyContainer;
-    private RequestValidator validator;
 
     public CurrencyService(CurrencyContainer currencyContainer) {
 
         this.restTemplate = new RestTemplate();
-        this.currencyContainer = getCurrencyContainer();
-        this.validator = new RequestValidator(getAvailableCurrencies());
+        getAvailableCurrencies();
     }
 
-    private CurrencyContainer getCurrencyContainer() {
+    private void getCurrencyContainer() {
 
         String url = "http://api.nbp.pl/api/exchangerates/tables/C/";
         CurrencyContainer[] currencyContainerArray = restTemplate.getForObject(url, CurrencyContainer[].class);
-        return currencyContainerArray[0];
+        this.currencyContainer = currencyContainerArray[0];
     }
 
     public Map<String, String> getAvailableCurrencies() {
+
+        getCurrencyContainer();
         return this.currencyContainer.getCodeMap().entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getCurrency()));
     }
@@ -40,10 +40,12 @@ public class CurrencyService {
     }
 
     public Currency[] getExchangeRates() {
-        return null;
+
+        getCurrencyContainer();
+        return this.currencyContainer.getRates();
     }
 
     public boolean isRequestValid(HttpServletRequest request) {
-        return validator.isValid(request);
+        return new RequestValidator(getAvailableCurrencies()).isValid(request);
     }
 }

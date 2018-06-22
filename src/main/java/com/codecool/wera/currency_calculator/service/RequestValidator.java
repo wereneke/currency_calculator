@@ -13,6 +13,14 @@ public class RequestValidator {
 
     public boolean isValid(HttpServletRequest request) {
 
-        return true;
+        String clientSelling = request.getParameter("sell");
+        String clientBuying = request.getParameter("buy");
+        String sellingAmount = request.getParameter("amount");
+
+        if (codes.containsKey(clientSelling) && 
+                codes.containsKey(clientBuying) && 
+                sellingAmount.matches("-?\\d+(\\.\\d+)?")) return true;
+        
+        else return false;
     }
 }
