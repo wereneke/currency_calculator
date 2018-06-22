@@ -62,6 +62,7 @@ public class CurrencyContainer implements Serializable {
     }
 
     public Map<String, Currency> getCodeMap() {
+
         setCodeMap();
         return codeMap;
     }

@@ -49,9 +49,4 @@ public class Currency implements Serializable {
     public void setAsk(Float ask) {
         this.ask = ask;
     }
-
-    @Override
-    public String toString() {
-        return String.format("%s | %s", currency, code);
-    }
 }

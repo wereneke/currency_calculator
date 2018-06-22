@@ -13,11 +13,14 @@ import java.util.stream.Collectors;
 @Service
 public class CurrencyService {
 
-    private RestTemplate restTemplate;
-    private CurrencyContainer currencyContainer;
-
     @Autowired
     private CurrencyCalculator calculator;
+
+    @Autowired
+    private RequestValidator validator;
+
+    private RestTemplate restTemplate;
+    private CurrencyContainer currencyContainer;
 
     public CurrencyService() {
 
@@ -62,6 +65,6 @@ public class CurrencyService {
     }
 
     public boolean isRequestValid(HttpServletRequest request) {
-        return new RequestValidator(getAvailableCurrencies()).isValid(request);
+        return validator.isValid(request, currencyContainer.getCodeMap());
     }
 }
