@@ -1,10 +1,16 @@
 package com.codecool.wera.currency_calculator.currency;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
+@Component
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CurrencyContainer implements Serializable {
 
@@ -13,6 +19,7 @@ public class CurrencyContainer implements Serializable {
     private LocalDate tradingDate;
     private LocalDate effectiveDate;
     private Currency[] rates;
+    private Map<String, Currency> codeMap;
 
     public String getTable() {
         return table;
@@ -52,5 +59,16 @@ public class CurrencyContainer implements Serializable {
 
     public void setRates(Currency[] rates) {
         this.rates = rates;
+    }
+
+    public Map<String, Currency> getCodeMap() {
+        setCodeMap();
+        return codeMap;
+    }
+
+    public void setCodeMap() {
+
+        this.codeMap = Arrays.asList(rates).stream()
+                .collect(Collectors.toMap(Currency::getCode, Function.identity()));
     }
 }

@@ -19,9 +19,6 @@ public class CurrencyController {
     @Autowired
     private CurrencyService service;
 
-    @Autowired
-    private RequestValidator validator;
-
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public Map<String, String> getAvailableCurrencies() {
@@ -31,9 +28,9 @@ public class CurrencyController {
     @RequestMapping(value = "/calculator", method = RequestMethod.POST)
     public String calculate(HttpServletRequest request) {
 
-        if (validator.isValid(request)) {
+//        if (service.isRequestValid(request)) {
             return service.calculate(request);
-        } else throw new Exception();
+
     }
 
     @RequestMapping(value = "/exchange", method = RequestMethod.GET)

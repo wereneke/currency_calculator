@@ -1,13 +1,18 @@
 package com.codecool.wera.currency_calculator.service;
 
-import org.springframework.stereotype.Component;
-
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
-@Component
 public class RequestValidator {
 
+    private Map<String, String> codes;
+
+    public RequestValidator(Map<String, String> codes) {
+        this.codes = codes;
+    }
+
     public boolean isValid(HttpServletRequest request) {
+
         return true;
     }
 }
