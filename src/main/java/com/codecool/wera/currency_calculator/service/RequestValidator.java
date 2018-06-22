@@ -17,6 +17,8 @@ public class RequestValidator {
         String clientBuying = request.getParameter("buy");
         String sellingAmount = request.getParameter("amount");
 
+        System.out.println(clientSelling + clientBuying + sellingAmount);
+
         if (codes.containsKey(clientSelling) &&
                 codes.containsKey(clientBuying) &&
                 sellingAmount.matches("\\d+(\\.\\d+)?")) return true;

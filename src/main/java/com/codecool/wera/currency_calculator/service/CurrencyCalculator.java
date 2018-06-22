@@ -13,7 +13,6 @@ public class CurrencyCalculator {
         BigDecimal sPrice = BigDecimal.valueOf(sellPrice);
         BigDecimal bPrice = BigDecimal.valueOf(buyPrice);
 
-        
-        return null;
+        return amount.multiply(sPrice.divide(bPrice, 3, BigDecimal.ROUND_HALF_DOWN));
     }
 }

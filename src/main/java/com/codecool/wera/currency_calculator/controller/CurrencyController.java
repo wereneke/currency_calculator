@@ -31,7 +31,6 @@ public class CurrencyController {
         if (service.isRequestValid(request)) {
             return service.calculate(request);
         } else throw new BadRequestException();
-
     }
 
     @RequestMapping(value = "/exchange", method = RequestMethod.GET)

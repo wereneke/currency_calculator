@@ -19,7 +19,7 @@ public class CurrencyService {
     @Autowired
     private CurrencyCalculator calculator;
 
-    public CurrencyService(CurrencyContainer currencyContainer) {
+    public CurrencyService() {
 
         this.restTemplate = new RestTemplate();
         getAvailableCurrencies();
