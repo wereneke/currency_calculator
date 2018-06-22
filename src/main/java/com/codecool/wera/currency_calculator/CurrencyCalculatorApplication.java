@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.Map;
 
 @SpringBootApplication
-public class CurrencyCalculatorApplication implements ApplicationRunner {
+public class CurrencyCalculatorApplication{
 
 	@Autowired
 	CurrencyController controller;
@@ -22,15 +22,4 @@ public class CurrencyCalculatorApplication implements ApplicationRunner {
 		SpringApplication.run(CurrencyCalculatorApplication.class, args);
 	}
 
-	@Override
-	public void run(ApplicationArguments args) throws Exception {
-
-		controller.getTicks();
-
-		Currency[] c = controller.getCurrencyContainer().getRates();
-
-		for (Currency currency: c) {
-			System.out.println(currency);
-		}
-	}
 }
