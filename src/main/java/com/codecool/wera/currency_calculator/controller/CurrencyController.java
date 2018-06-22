@@ -2,12 +2,13 @@ package com.codecool.wera.currency_calculator.controller;
 
 import com.codecool.wera.currency_calculator.currency.Currency;
 import com.codecool.wera.currency_calculator.service.CurrencyService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ public class CurrencyController {
 
     @Autowired
     private CurrencyService service;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
