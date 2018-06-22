@@ -2,6 +2,7 @@ package com.codecool.wera.currency_calculator.service;
 
 import com.codecool.wera.currency_calculator.currency.Currency;
 import com.codecool.wera.currency_calculator.currency.CurrencyContainer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,6 +15,9 @@ public class CurrencyService {
 
     private RestTemplate restTemplate;
     private CurrencyContainer currencyContainer;
+
+    @Autowired
+    private CurrencyCalculator calculator;
 
     public CurrencyService(CurrencyContainer currencyContainer) {
 
@@ -36,7 +40,19 @@ public class CurrencyService {
     }
 
     public String calculate(HttpServletRequest request) {
-        return null;
+
+        getCurrencyContainer();
+        Map<String, Currency> codeMap = currencyContainer.getCodeMap();
+
+        String clientSelling = request.getParameter("sell");
+        String clientBuying = request.getParameter("buy");
+        String sellingAmount = request.getParameter("amount");
+
+        Float sellPrice = codeMap.get(clientSelling).getAsk();
+        Float buyPrice = codeMap.get(clientBuying).getBid();
+        Float amount = Float.valueOf(sellingAmount);
+
+        return calculator.calculate(amount, sellPrice, buyPrice).toString();
     }
 
     public Currency[] getExchangeRates() {

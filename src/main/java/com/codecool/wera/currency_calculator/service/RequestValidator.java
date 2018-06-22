@@ -21,6 +21,6 @@ public class RequestValidator {
                 codes.containsKey(clientBuying) &&
                 sellingAmount.matches("\\d+(\\.\\d+)?")) return true;
 
-        else return false;
+        return false;
     }
 }
