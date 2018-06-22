@@ -9,15 +9,6 @@ public class Currency implements Serializable {
     private Float bid;
     private Float ask;
 
-    public Currency(String currency, String code, Float bid, Float ask) {
-        this.currency = currency;
-        this.code = code;
-        this.bid = bid;
-        this.ask = ask;
-    }
-
-    public Currency() {}
-
     public String getCurrency() {
         return currency;
     }
