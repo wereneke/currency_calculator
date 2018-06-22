@@ -17,10 +17,10 @@ public class RequestValidator {
         String clientBuying = request.getParameter("buy");
         String sellingAmount = request.getParameter("amount");
 
-        if (codes.containsKey(clientSelling) && 
-                codes.containsKey(clientBuying) && 
-                sellingAmount.matches("-?\\d+(\\.\\d+)?")) return true;
-        
+        if (codes.containsKey(clientSelling) &&
+                codes.containsKey(clientBuying) &&
+                sellingAmount.matches("\\d+(\\.\\d+)?")) return true;
+
         else return false;
     }
 }
