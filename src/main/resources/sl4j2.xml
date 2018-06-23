@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+
+        <JDBC name="h2logs" tablename="logs">
+            <ConnectionFactory class="com.codecool.wera.currency_calculator.dbconnection.ConnectionFactory" method="getConnection" />
+            <Column name="EVENT_ID" pattern="%uid" />
+            <Column name="EVENT_DATE" isEventTimestamp="true" />
+            <Column name="LEVEL" pattern="%level" />
+            <Column name="LOGGER" pattern="%logger" />
+            <Column name="MESSAGE" pattern="%message" />
+            <Column name="THROWABLE" pattern="%ex{full}" />
+        </JDBC>
+    </Appenders>
+    <Loggers>
+        <Root level="all">
+            <AppenderRef ref="Console"/>
+        </Root>
+        <Logger name="com.codecool.wera.currency_calculator.controller.CurrencyController" level="all" additivity="false">
+            <AppenderRef ref="h2logs"/>
+        </Logger>
+    </Loggers>
+</Configuration>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+
 @RestController
 @RequestMapping("/currencies")
 public class CurrencyController {
@@ -22,6 +23,7 @@ public class CurrencyController {
     @ResponseBody
     public Map<String, String> getAvailableCurrencies() {
 
+        LOGGER.info("hola");
         return service.getAvailableCurrencies();
     }
 
