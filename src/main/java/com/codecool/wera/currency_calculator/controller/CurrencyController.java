@@ -23,7 +23,6 @@ public class CurrencyController {
     @ResponseBody
     public Map<String, String> getAvailableCurrencies() {
 
-        LOGGER.info("hola");
         return service.getAvailableCurrencies();
     }
 
