@@ -1,5 +1,6 @@
 # currency_calculator
-===
+========
+
 to use the app you need postman or curl or other tool for making api calls,
 JDK 1.8, maven and git
 
