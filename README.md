@@ -13,7 +13,7 @@ and to run
 ```
 cd currency_calculator
 mvn package
-java -jar currency_calculator0.0.1-SNAPSHOT.jar
+java -jar currency_calculator-0.0.1-SNAPSHOT.jar
 ```
 
 
